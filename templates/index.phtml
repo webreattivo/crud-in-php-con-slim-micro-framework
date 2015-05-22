@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div style="margin-top: 5%;" class="panel panel-default">
                 <div class="panel-heading">Rubrica Telefonica</div>
                 <div class="panel-body">
                     <table class="table">
@@ -30,13 +30,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td><a href="" class="btn btn-primary">Modifica</a></td>
-                            <td><a href="" class="btn btn-primary">Cancella</a></td>
-                        </tr>
+                        <?php foreach ($contacts as $row): ?>
+                            <tr>
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['fullname']; ?></td>
+                                <td><?php echo $row['phone']; ?></td>
+                                <td><a href="/edit/<?php echo $row['id']; ?>" class="btn btn-primary">Modifica</a></td>
+                                <td><a href="/delete/<?php echo $row['id']; ?>" class="btn btn-primary">Cancella</a></td>
+                            </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

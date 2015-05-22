@@ -16,18 +16,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div style="margin-top: 5%;" class="panel panel-default">
                 <div class="panel-heading">Rubrica Telefonica</div>
                 <div class="panel-body">
                     <form action="" method="post" role="form">
                         <div class="form-group">
                             <label for="">Nome & Cognome</label>
-                            <input type="text" class="form-control" name="" id="" required="">
+                            <input type="text" class="form-control" name="fullname" id="" value="<?php echo $contact['fullname']; ?>" required="">
                         </div>
                         <div class="form-group">
                             <label for="">Numero di Telefono</label>
-                            <input type="text" class="form-control" name="" id="" required="">
+                            <input type="text" class="form-control" name="phone" id="" value="<?php echo $contact['phone']; ?>" required="">
                         </div>
+                        <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
