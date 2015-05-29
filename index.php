@@ -1,6 +1,9 @@
 <?php
 require 'vendor/autoload.php';
 
+/**
+ * Connessione al database
+ */
 $db = new PDO('mysql:host=127.0.0.1;dbname=rubrica', 'root', 'rootpass');
 
 $app = new \Slim\Slim();
@@ -8,6 +11,9 @@ $app->config([
     'templates.path' => './templates',
 ]);
 
+/**
+ * Contatti rubrica
+ */
 $app->get('/', function () use ($app, $db) {
     $sql = $db->query('SELECT * FROM contacts ORDER BY id DESC');
     $sql->execute();
@@ -16,6 +22,9 @@ $app->get('/', function () use ($app, $db) {
     ]);
 });
 
+/**
+ * Nuovo contatto
+ */
 $app->map('/add', function () use ($app, $db) {
     if ($app->request->isPost()) {
         $sql = $db->prepare('INSERT INTO contacts (fullname, phone) VALUES (:fullname, :phone)');
@@ -27,6 +36,9 @@ $app->map('/add', function () use ($app, $db) {
     $app->render('add.phtml', []);
 })->via('GET', 'POST');
 
+/**
+ * Modificare un contatto
+ */
 $app->get('/edit/:id', function ($id) use ($app, $db) {
     if ($app->request->isPost()) {
         $sql = $db->prepare('UPDATE contacts SET fullname = :fullname, phone = :phone WHERE id = :id');
@@ -44,6 +56,9 @@ $app->get('/edit/:id', function ($id) use ($app, $db) {
     ]);
 })->via('GET', 'POST');
 
+/**
+ * Eliminare un contatto
+ */
 $app->get('/delete/:id', function ($id) use ($app, $db) {
     $sql = $db->prepare('DELETE FROM contacts WHERE id = :id');
     $sql->bindParam(':id', $id);
